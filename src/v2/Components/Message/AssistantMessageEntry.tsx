@@ -22,23 +22,27 @@ export const AssistantMessageEntry: FunctionComponent<AssistantMessageProps> = (
   if (message.options) {
     return <AssistantButtonEntry message={message} ask={ask} preview={preview} blockInput={blockInput} />;
   }
+
   return (
     <PFAssistantMessageEntry icon={ChatbotIcon}>
       <TextEntry content={message.content} preview={preview} />
     </PFAssistantMessageEntry>
   );
 };
+
 export const AssistantButtonEntry: FunctionComponent<AssistantMessageProps> = ({ message, ask, preview, blockInput }) => {
   return (
     <PFAssistantMessageEntry
       options={message.options?.map((o, index) => ({
-        title: o.value ?? '',
+        title: o.text ?? '',
         props: {
           color: OPTION_COLORS[index % OPTION_COLORS.length],
           className: blockInput ? 'astro-option-disabled' : '',
-          onClick: () => blockInput || ask({ label: o.value }),
+          onClick: () => blockInput || ask({ label: o.value, hideMessage: !!o.optionId, optionId: o.optionId }),
         },
       }))}
-    />
+    >
+      <TextEntry content={message.content} preview={preview} />
+    </PFAssistantMessageEntry>
   );
 };
