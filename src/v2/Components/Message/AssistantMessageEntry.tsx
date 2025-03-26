@@ -22,12 +22,14 @@ export const AssistantMessageEntry: FunctionComponent<AssistantMessageProps> = (
   if (message.options) {
     return <AssistantButtonEntry message={message} ask={ask} preview={preview} blockInput={blockInput} />;
   }
+
   return (
     <PFAssistantMessageEntry icon={ChatbotIcon}>
       <TextEntry content={message.content} preview={preview} />
     </PFAssistantMessageEntry>
   );
 };
+
 export const AssistantButtonEntry: FunctionComponent<AssistantMessageProps> = ({ message, ask, preview, blockInput }) => {
   return (
     <PFAssistantMessageEntry
